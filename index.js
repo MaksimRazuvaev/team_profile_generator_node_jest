@@ -10,7 +10,14 @@ const questions = () => {
             type: 'input',
             name: 'title',
             message: 'What is title of your project?',
-        },
+            // to implement accross
+            validate: async (input) => {
+                if (input !== 'y' || input !== 'n') {
+                   return 'Incorrect asnwer';
+                }
+                return true;
+             }
+            },
         {
             type: 'input',
             name: 'description',

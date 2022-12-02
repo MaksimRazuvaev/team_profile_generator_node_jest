@@ -10,16 +10,16 @@ describe("Engineer", () => {
         });
 
         // to test methods of the object Engineer
-        it("should return 'getGithub()', 'getRole()'of the created object", () => {
+        /*it("should return 'getGithub()', 'getRole()'of the created object", () => {
             const obj = new Engineer("Suzy", 1, "suzy@gmail.com", "github name");
 
             expect(getGithub(obj)).toEqual("github name");
             expect(getRole(obj)).toEqual(["Suzy", 1, "suzy@gmail.com", "github name"]);
-        });
+        });*/
         
         // do I need negative TC?
         // to check an error for github name input
-        it("should throw an error if name provided in the wrong format", () => {
+        it("should throw an error if github provided in the wrong format", () => {
             const cb = () => new Engineer("Suzy", 1, "suzygmail.com", "");
       
             // Define the error message that is expected to be thrown

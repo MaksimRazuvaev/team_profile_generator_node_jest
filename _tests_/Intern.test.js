@@ -10,16 +10,16 @@ describe("Intern", () => {
         });
 
         // to test methods of the object Intern
-        it("should return 'getSchool()', 'getRole()'of the created object", () => {
+        /*it("should return 'getSchool()', 'getRole()'of the created object", () => {
             const obj = new Intern("Suzy", 1, "suzy@gmail.com", "school");
 
             expect(getSchool(obj)).toEqual("school");
-            expect(getRole(obj)).toEqual(["Suzy", 1, "suzy@gmail.com", "school"]);
-        });
+            //??? expect(getRole(obj)).toEqual(["Suzy", 1, "suzy@gmail.com", "school"]);
+        });*/
         
         // do I need negative TC?
-        // to check an error for school name input
-        it("should throw an error if name provided in the wrong format", () => {
+        // to check an error for school input
+        it("should throw an error if school provided in the wrong format", () => {
             const cb = () => new Intern("Suzy", 1, "suzygmail.com", "");
       
             // Define the error message that is expected to be thrown
