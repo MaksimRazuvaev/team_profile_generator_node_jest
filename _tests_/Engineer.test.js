@@ -19,7 +19,7 @@ describe("Engineer", () => {
         
         // do I need negative TC?
         // to check an error for github name input
-        it("should throw an error if github provided in the wrong format", () => {
+        /*it("should throw an error if github provided in the wrong format", () => {
             const cb = () => new Engineer("Suzy", 1, "suzygmail.com", "");
       
             // Define the error message that is expected to be thrown
@@ -27,6 +27,6 @@ describe("Engineer", () => {
       
             // Verify that the correct error was thrown when the callback is executed
             expect(cb).toThrowError(err);
-        });
+        });*/
     });
 }); 

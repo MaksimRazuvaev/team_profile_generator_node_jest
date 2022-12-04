@@ -24,14 +24,14 @@ describe("Employee", () => {
         
         // do I need negative TC?
         // to check an error for name input
-        it("should throw an error if name provided in the wrong format", () => {
+        /*it("should throw an error if name provided in the wrong format", () => {
             const cb = () => new Employee(3, 1, "suzy@gmail.com");
       
             // Define the error message that is expected to be thrown
             const err = new Error("Expected parameter 'name' to be a non-empty string");
       
             // Verify that the correct error was thrown when the callback is executed
-            expect(cb).toThrowError(err);
+            expect(cb.IsValidName()).toThrowError(err);
         });
         // to check an error for id input
         it("should throw an error if name provided in the wrong format", () => {
@@ -52,6 +52,6 @@ describe("Employee", () => {
       
             // Verify that the correct error was thrown when the callback is executed
             expect(ValidateEmail(this.email)).toThrowError(err);
-        });
+        });*/
     });
 }); 

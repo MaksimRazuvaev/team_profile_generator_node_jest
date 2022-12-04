@@ -3,13 +3,41 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const generateMarkdown = require('./utils/generateMarkdown');
 
+// to extend employee's classes to create an objects
+const Employee = require('./lib/Employee');
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
+
+const team = [];
+
 // to create an array of user input
-const questions = () => {
+const toCreateTeam = () => {
+    return inquirer.prompt([
+        {
+            type: 'list',
+            name: 'role',
+            message: 'Do you want to create new role or exit and form HTML page?',
+            choices: ["Engineer", "Intern", "Finish building team"],
+        },     
+    ])
+    .then((answer) => {
+        if (answer.role === 'Engineer') {
+            enterEngineer();
+        } else if (nswer.role === 'Intern') {
+            enterIntern();
+        } else {
+            writeToFile();
+        }
+    });
+};
+
+const enterManager = () => {
     return inquirer.prompt([
         {
             type: 'input',
-            name: 'title',
-            message: 'What is title of your project?',
+            name: 'name',
+            message: 'What is your manager name?',
             // to implement accross
             validate: async (input) => {
                 if (input !== 'y' || input !== 'n') {
@@ -17,51 +45,109 @@ const questions = () => {
                 }
                 return true;
              }
-            },
-        {
-            type: 'input',
-            name: 'description',
-            message: 'What is your project is about?',
         },
         {
             type: 'input',
-            name: 'installation',
-            message: 'How to install your app?',
-        },
-        {
-            type: 'input',
-            name: 'usage',
-            message: 'How to use your app?',
-        },
-        {
-            type: 'input',
-            name: 'contributing',
-            message: 'How to contribute to your project?',
-        },
-        {
-            type: 'input',
-            name: 'tests',
-            message: 'How to test your app?',
-        },
-        {
-            type: 'input',
-            name: 'username',
-            message: 'What is your GitHub user name?',
+            name: 'id',
+            message: 'What is your manager id?',
         },
         {
             type: 'input',
             name: 'email',
-            message: 'What is your email address?',
+            message: 'What is your manager email address?',
         },
         {
-            type: 'list',
-            name: 'license',
-            message: 'What license should be upplied to your app?',
-            choices: ["ISC", "MIT", "Apache", "GNU", "Mozilla Public License 2.0", "None"],
+            type: 'input',
+            name: 'officeNumber',
+            message: 'What is your manager office number?',
         },
-    ])};
+    ])
+        .then((answer) => {
+            const manager = new Manager(answer.name, answer.id, answer.email, answer.officeNumber);
+            console.table(manager);
+            team.push(manager);
+            toCreateTeam();
+        });
+};
 
-// TODO: Create a function to write README file
+const enterEngineer = () => {
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'engineer',
+            message: 'What is your engineer name?',
+            // to implement accross
+            validate: async (input) => {
+                if (input !== 'y' || input !== 'n') {
+                    return 'Incorrect asnwer';
+                }
+                return true;
+                }
+            },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'What is your engineer id?',
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is your engineer email address?',
+        },
+        {
+            type: 'input',
+            name: 'github',
+            message: 'What is your engineer GitHub username?',
+        },
+    ])
+    .then((answer) => {
+        const engineer = new Engineer(answer.name, answer.id, answer.email, answer.github);
+        console.table(engineer);
+        team.push(engineer);
+        toCreateTeam();
+    });
+};
+
+const enterIntern = () => {
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'intern',
+            message: 'What is your intern name?',
+            // to implement accross
+            validate: async (input) => {
+                if (input !== 'y' || input !== 'n') {
+                    return 'Incorrect asnwer';
+                }
+                return true;
+                }
+            },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'What is your intern id?',
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is your intern email address?',
+        },
+        {
+            type: 'input',
+            name: 'school',
+            message: 'What is your intern school?',
+        },
+    ])
+    .then((answer) => {
+        const intern = new Intern(answer.name, answer.id, answer.email, answer.school);
+        console.table(intern);
+        team.push(intern);
+        toCreateTeam();
+    });
+};
+
+
+// TODO: Create a function to write HTML page
 function writeToFile(fileName, data) {
     // fs.appendFile(fileName, JSON.stringify(data), (err) =>
     fs.appendFile(fileName, data, (err) =>
@@ -72,11 +158,11 @@ function writeToFile(fileName, data) {
 
 // TODO: Create a function to initialize app
 const init = () => {
-    questions()
+    enterManager()
       // Use writeFile method imported from fs.promises to use promises instead of
       // a callback function
-      .then((answer) => writeToFile('README_PROMPT.md', generateMarkdown(answer)))
-      .then(() => console.log('Successfully wrote to README_PROMPT.md'))
+      .then((answer) => writeToFile('index.html', generateHTML(answer)))
+      .then(() => console.log('Successfully wrote to index.html'))
       .catch((err) => console.error(err));
   };
 // Function call to initialize app
