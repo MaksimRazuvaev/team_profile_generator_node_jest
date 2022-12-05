@@ -1,7 +1,7 @@
 // To include nbm packages needed for create questionary (inquier) and save to file (fs) libraries
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateMarkdown = require('./utils/generateMarkdown');
+const generateHTML = require('./generateHTML');
 
 // to extend employee's classes to create an objects
 const Employee = require('./lib/Employee');
@@ -13,7 +13,10 @@ const team = [];
 
 // to create an array of user input
 const toCreateTeam = () => {
-    return inquirer.prompt([
+    // return 
+    console.log("this is answer"+team);
+
+    inquirer.prompt([
         {
             type: 'list',
             name: 'role',
@@ -22,12 +25,18 @@ const toCreateTeam = () => {
         },     
     ])
     .then((answer) => {
+        console.log("this is answer"+team);
+
         if (answer.role === 'Engineer') {
             enterEngineer();
-        } else if (nswer.role === 'Intern') {
+        } else if (answer.role === 'Intern') {
             enterIntern();
         } else {
-            writeToFile();
+            // writeToFile();
+            // return team;
+            console.log(answer);
+            // writeToFile('index.html', generateHTML(answer));
+            writeToFile('index.html', generateHTML(team));
         }
     });
 };
@@ -39,12 +48,12 @@ const enterManager = () => {
             name: 'name',
             message: 'What is your manager name?',
             // to implement accross
-            validate: async (input) => {
-                if (input !== 'y' || input !== 'n') {
-                   return 'Incorrect asnwer';
-                }
-                return true;
-             }
+            // validate: async (input) => {
+            //     if (input !== 'y' || input !== 'n') {
+            //        return 'Incorrect asnwer';
+            //     }
+            //     return true;
+            //  }
         },
         {
             type: 'input',
@@ -64,8 +73,13 @@ const enterManager = () => {
     ])
         .then((answer) => {
             const manager = new Manager(answer.name, answer.id, answer.email, answer.officeNumber);
+            console.log(manager);
+
             console.table(manager);
+            console.log("this is manager before team push"+ JSON.stringify(team));
             team.push(manager);
+            console.log("this is manager after team push"+JSON.stringify(team));
+            console.log("this is team from manager"+JSON.stringify(team));
             toCreateTeam();
         });
 };
@@ -74,16 +88,16 @@ const enterEngineer = () => {
     return inquirer.prompt([
         {
             type: 'input',
-            name: 'engineer',
+            name: 'name',
             message: 'What is your engineer name?',
             // to implement accross
-            validate: async (input) => {
-                if (input !== 'y' || input !== 'n') {
-                    return 'Incorrect asnwer';
-                }
-                return true;
-                }
-            },
+            // validate: async (input) => {
+            //     if (input !== 'y' || input !== 'n') {
+            //         return 'Incorrect asnwer';
+            //     }
+            //     return true;
+            //     }
+        },
         {
             type: 'input',
             name: 'id',
@@ -112,16 +126,16 @@ const enterIntern = () => {
     return inquirer.prompt([
         {
             type: 'input',
-            name: 'intern',
+            name: 'name',
             message: 'What is your intern name?',
             // to implement accross
-            validate: async (input) => {
-                if (input !== 'y' || input !== 'n') {
-                    return 'Incorrect asnwer';
-                }
-                return true;
-                }
-            },
+            // validate: async (input) => {
+            //     if (input !== 'y' || input !== 'n') {
+            //         return 'Incorrect asnwer';
+            //     }
+            //     return true;
+            //     }
+        },
         {
             type: 'input',
             name: 'id',
@@ -161,7 +175,7 @@ const init = () => {
     enterManager()
       // Use writeFile method imported from fs.promises to use promises instead of
       // a callback function
-      .then((answer) => writeToFile('index.html', generateHTML(answer)))
+    //   .then((answer) => writeToFile('index.html', generateHTML(answer)))
       .then(() => console.log('Successfully wrote to index.html'))
       .catch((err) => console.error(err));
   };
