@@ -29,11 +29,12 @@ function generateHTML(team) {
             </div>
         </header>
         <main class="container-fluid">
-            <div class="row">
-                ${createCard(team)};
-            </div>
+            <section class="col-12 col-md-8 col-lg-9">
+                <div class="row" id="managerCard">
+                    ${createCard(team)};
+                </div>
+            </section>    
         </main>
-        <script src="./development/js/script.js"></script>
     </body>
 </html>`
 };
@@ -41,87 +42,82 @@ function generateHTML(team) {
 
 function generateManager(manager) { 
     return `
-<section class="col-12 col-md-8 col-lg-9">
-    <div class="row" id="managerCard">
-        <div class="col">
-            <div class="card h-100 ">
-                <h4 class="card-header custom-card-header">${manager.name}</h4>
-                <h5 class="card-header custom-card-header">Mahager</h5>
-                <div class="card-body">
-                    <p class="card-text">ID: ${manager.id}</p>
-                    <p class="card-text">Email: ${manager.email}</p>
-                    <p class="card-text">Office number: ${manager.officeNumber}</p>
-                </div>
-            </div>
+<div class="col col-12 col-sm-4 col-md3">
+    <div class="card h-100 ">
+        <h4 class="card-header custom-card-header">${manager.name}</h4>
+        <h5 class="card-header custom-card-header">${manager.title}</h5>
+        <div class="card-body">
+            <p class="card-text">ID: ${manager.id}</p>
+            <p class="card-text"><a href="mailto:${manager.email}">Email: ${manager.email}</a></p>
+            <p class="card-text">Office number: ${manager.officeNumber}</p>
         </div>
-    </div>    
-</section>`
-}
+    </div>
+</div>`
+};
 
 function generateEngineer(engineer) {
-    retutn `
-<section class="col-12 col-md-8 col-lg-9">
-    <div class="row" id="today-forecast">
-        <div class="col">
-            <div class="card h-100 ">
-                <h4 class="card-header custom-card-header">${engineer.name}</h4>
-                <h5 class="card-header custom-card-header">Mahager</h5>
-                <div class="card-body">
-                    <p class="card-text">ID: ${engineer.id}</p>
-                    <p class="card-text">Email: ${engineer.email}</p>
-                    <p class="card-text">GitHub: <a href="https://github.com/${engineer.github}"</a></p>
-                </div>
-            </div>
+    return `
+<div class="col col-12 col-sm-4 col-md3">
+    <div class="card h-100 ">
+        <h4 class="card-header custom-card-header">${engineer.name}</h4>
+        <h5 class="card-header custom-card-header">${engineer.title}</h5>
+        <div class="card-body">
+            <p class="card-text">ID: ${engineer.id}</p>
+            <p class="card-text"><a href="mailto:${engineer.email}">Email: ${engineer.email}</a></p>
+            <p class="card-text">GitHub: <a href="https://github.com/${engineer.github}" target="_blank">GitHub: ${engineer.github}</a></p>
         </div>
-    </div>    
-</section>`
-}
+    </div>
+</div>`
+};
   
 function generateIntern(intern) {
     return `
-<section class="col-12 col-md-8 col-lg-9">
-    <div class="row" id="today-forecast">
-        <div class="col">
-            <div class="card h-100 ">
-                <h4 class="card-header custom-card-header">${intern.name}</h4>
-                <h5 class="card-header custom-card-header">Mahager</h5>
-                <div class="card-body">
-                    <p class="card-text">ID: ${intern.id}</p>
-                    <p class="card-text">Email: ${intern.email}</p>
-                    <p class="card-text">School:  ${intern.school}</a></p>
-                </div>
-            </div>
+<div class="col col-12 col-sm-4 col-md3">
+    <div class="card h-100 ">
+        <h4 class="card-header custom-card-header">${intern.name}</h4>
+        <h5 class="card-header custom-card-header">${intern.title}</h5>
+        <div class="card-body">
+            <p class="card-text">ID: ${intern.id}</p>
+            <p class="card-text"> <a href="mailto:${intern.email}">Email: ${intern.email}</a></p>
+            <p class="card-text">School:  ${intern.school}</a></p>
         </div>
-    </div>    
-</section>`
-}
+    </div>
+</div>`
+};
 
 function createCard(team) {
 
-    for(let i = 0; i < team.length; i++){
-        if (team[i].getRole() === "Manager") {
-            return generateManager((team[i].getRole()));
+    const cardArray = [];
+
+    // for(let i = 0; i < team.length; i++){
+/*        for(let i = team.length - 1; i > 0; i--){
+        console.log("what is team lenght?" + team.length);
+        console.table(team);
+        if (team[i].getRole() === "Intern") {
+            console.log("what is role?" + team[i].getRole());
+            cardArray.push(generateIntern(team[i]));
+            // return generateIntern(team[i]);
         }
         else if (team[i].getRole() === "Engineer") {
-            return generateEngineer((team[i].getRole()));
+            cardArray.push(generateEngineer(team[i]));
+            // return generateEngineer(team[i]);
         }else{
-            return generateIntern((team[i].getRole()));
+            cardArray.push(generateManager(team[i]));
+
+            // return generateManager(team[i]);
         }
-
-
-
-        // if (team.filter((team) => employee.getRole() === "Manager") => generateManager(manager)) {
-        //     return generateManager(team);
-        // }
-        // else if (team.filter((team) => employee.getRole() === "Employee")) {
-        //     return generateEngineer(engineer);
-        // }else{
-        //     return generateIntern(intern);
-        // }
-    
-    
     }
-}
+  */  
+
+    cardArray.push(team.filter((employee) => employee.getRole() === 'Manager').map((manager) => generateManager(manager)));
+
+    cardArray.push(team.filter((employee) => employee.getRole() === 'Engineer').map((engineer) => generateEngineer(engineer)));
+
+    cardArray.push(team.filter((employee) => employee.getRole() === 'Intern').map((intern) => generateIntern(intern)));
+
+    console.log("what is in array" + cardArray);
+    return cardArray.join('');
+};
 
   
   module.exports = generateHTML; 
