@@ -6,8 +6,6 @@ describe("Intern", () => {
         it("should create an object with 'name', 'id', 'email', 'school'", () => {
             const obj = new Intern("Suzy", 1, "suzy@gmail.com", "school");
 
-console.log(obj);
-
             expect(obj.getSchool()).toEqual("school");
         });
 

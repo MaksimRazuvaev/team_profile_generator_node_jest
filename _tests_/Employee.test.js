@@ -7,10 +7,24 @@ describe("Employee", () => {
             const obj = new Employee("Suzy", 1, "suzy@gmail.com");
 
             expect(obj.name).toEqual("Suzy");
+            // expect(obj).toEqual({"Suzy", 1, "suzy@gmail.com"});
+        });
+        it("should create an object with 'name', 'id', 'email'", () => {
+            const obj = new Employee("Suzy", 1, "suzy@gmail.com");
+
             expect(obj.id).toEqual(1);
+            // expect(obj).toEqual({"Suzy", 1, "suzy@gmail.com"});
+        });
+        it("should create an object with 'name', 'id', 'email'", () => {
+            const obj = new Employee("Suzy", 1, "suzy@gmail.com");
+
             expect(obj.email).toEqual("suzy@gmail.com");
             // expect(obj).toEqual({"Suzy", 1, "suzy@gmail.com"});
         });
+
+
+
+
 
         // to test methods of the object Employee
         /*it("should return 'getName()', 'getId', 'getEmail', 'getRole' of the created object", () => {

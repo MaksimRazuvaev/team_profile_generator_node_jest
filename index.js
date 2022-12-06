@@ -1,21 +1,17 @@
 // To include nbm packages needed for create questionary (inquier) and save to file (fs) libraries
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateHTML = require('./generateHTML');
+const generateHTML = require('./src/generateHTML');
 
 // to extend employee's classes to create an objects
-const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
 const team = [];
 
-// to create an array of user input
+// to launch the query after manager is submitted
 const toCreateTeam = () => {
-    // return 
-    console.log("this is answer"+team);
-
     inquirer.prompt([
         {
             type: 'list',
@@ -25,88 +21,120 @@ const toCreateTeam = () => {
         },     
     ])
     .then((answer) => {
-        console.log("this is answer"+team);
-
         if (answer.role === 'Engineer') {
             enterEngineer();
         } else if (answer.role === 'Intern') {
             enterIntern();
         } else {
-            // writeToFile();
-            // return team;
-            console.log(answer);
-            // writeToFile('index.html', generateHTML(answer));
-            writeToFile('index.html', generateHTML(team));
+            writeToFile('./dist/index.html', generateHTML(team));
         }
     });
 };
 
+// initial query to get an manager data
 const enterManager = () => {
     return inquirer.prompt([
         {
             type: 'input',
             name: 'name',
             message: 'What is your manager name?',
-            // to implement accross
-            // validate: async (input) => {
-            //     if (input !== 'y' || input !== 'n') {
-            //        return 'Incorrect asnwer';
-            //     }
-            //     return true;
-            //  }
+            validate: namelInput => {
+                if (/[A-Za-z]/.test(namelInput)) {
+                    return true;
+                } else {
+                    console.log("Please enter use letters to enter name");
+                    return false;
+                }
+            }        
         },
         {
             type: 'input',
             name: 'id',
             message: 'What is your manager id?',
+            validate: idlInput => {
+                if (/[0-9]/.test(idlInput)) {
+                return true;
+                } else {
+                    console.log("Please use numbers for id");
+                    return false;
+                }
+            }
         },
         {
             type: 'input',
             name: 'email',
             message: 'What is your manager email address?',
+            validate: emailInput => {
+                if (/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(emailInput)) {
+                    return true;
+                } else {
+                    console.log("Please enter email in the email@gmail.com format");
+                    return false;
+                }
+            }
         },
         {
             type: 'input',
             name: 'officeNumber',
             message: 'What is your manager office number?',
+            validate: officeNumberlInput => {
+                if (/[0-9]/.test(officeNumberlInput)) {
+                return true;
+                } else {
+                    console.log("Please use numbers for officeNumber");
+                    return false;
+                }
+            }
         },
     ])
         .then((answer) => {
             const manager = new Manager(answer.name, answer.id, answer.email, answer.officeNumber);
-            console.log(manager);
-
-            console.table(manager);
-            console.log("this is manager before team push"+ JSON.stringify(team));
             team.push(manager);
-            console.log("this is manager after team push"+JSON.stringify(team));
-            console.log("this is team from manager"+JSON.stringify(team));
             toCreateTeam();
         });
 };
 
+// to launch Engineer query
 const enterEngineer = () => {
     return inquirer.prompt([
         {
             type: 'input',
             name: 'name',
             message: 'What is your engineer name?',
-            // to implement accross
-            // validate: async (input) => {
-            //     if (input !== 'y' || input !== 'n') {
-            //         return 'Incorrect asnwer';
-            //     }
-            //     return true;
-            //     }
+            validate: namelInput => {
+                if (/[A-Za-z]/.test(namelInput)) {
+                    return true;
+                } else {
+                    console.log("Please enter use letters to enter name");
+                    return false;
+                }
+            }        
         },
         {
             type: 'input',
             name: 'id',
             message: 'What is your engineer id?',
+            validate: idlInput => {
+                if (/[0-9]/.test(idlInput)) {
+                return true;
+                } else {
+                    console.log("Please use numbers for id");
+                    return false;
+                }
+            }
         },
         {
             type: 'input',
             name: 'email',
             message: 'What is your engineer email address?',
+            validate: emailInput => {
+                if (/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(emailInput)) {
+                    return true;
+                } else {
+                    console.log("Please enter email in the email@gmail.com format");
+                    return false;
+                }
+            }
         },
         {
             type: 'input',
@@ -116,45 +144,69 @@ const enterEngineer = () => {
     ])
     .then((answer) => {
         const engineer = new Engineer(answer.name, answer.id, answer.email, answer.github);
-        console.table(engineer);
         team.push(engineer);
         toCreateTeam();
     });
 };
 
+// to launch Intern query
 const enterIntern = () => {
     return inquirer.prompt([
         {
             type: 'input',
             name: 'name',
             message: 'What is your intern name?',
-            // to implement accross
-            // validate: async (input) => {
-            //     if (input !== 'y' || input !== 'n') {
-            //         return 'Incorrect asnwer';
-            //     }
-            //     return true;
-            //     }
+            validate: namelInput => {
+                if (/[A-Za-z]/.test(namelInput)) {
+                    return true;
+                } else {
+                    console.log("Please enter use letters to enter name");
+                    return false;
+                }
+            }        
         },
         {
             type: 'input',
             name: 'id',
             message: 'What is your intern id?',
+            validate: idlInput => {
+                if (/[0-9]/.test(idlInput)) {
+                return true;
+                } else {
+                    console.log("Please use numbers for id");
+                    return false;
+                }
+            }
         },
         {
             type: 'input',
             name: 'email',
             message: 'What is your intern email address?',
+            validate: emailInput => {
+                if (/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(emailInput)) {
+                    return true;
+                } else {
+                    console.log("Please enter email in the email@gmail.com format");
+                    return false;
+                }
+            }
         },
         {
             type: 'input',
             name: 'school',
             message: 'What is your intern school?',
+            validate: schoolInput => {
+                if (/[A-Za-z]/.test(schoolInput)) {
+                    return true;
+                } else {
+                    console.log("Please enter use letters to enter school");
+                    return false;
+                }
+            }        
         },
     ])
     .then((answer) => {
         const intern = new Intern(answer.name, answer.id, answer.email, answer.school);
-        console.table(intern);
         team.push(intern);
         toCreateTeam();
     });
@@ -163,19 +215,13 @@ const enterIntern = () => {
 
 // TODO: Create a function to write HTML page
 function writeToFile(fileName, data) {
-    // fs.appendFile(fileName, JSON.stringify(data), (err) =>
     fs.appendFile(fileName, data, (err) =>
-
-    // TODO: Describe how this ternary operator works
     err ? console.error(err) : console.log('Commit logged!'));
 }
 
-// TODO: Create a function to initialize app
+// function to initialize app
 const init = () => {
     enterManager()
-      // Use writeFile method imported from fs.promises to use promises instead of
-      // a callback function
-    //   .then((answer) => writeToFile('index.html', generateHTML(answer)))
       .then(() => console.log('Successfully wrote to index.html'))
       .catch((err) => console.error(err));
   };

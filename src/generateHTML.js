@@ -1,6 +1,7 @@
+// main function to form final HTML file
 function generateHTML(team) {
-    console.log("did I get to generateHTML?");
-    console.log("what inside team"+team);
+    // console.log("did I get to generateHTML?");
+    // console.log("what inside team"+team);
     return `
 <!DOCTYPE html>
 <html lang="en">
@@ -29,9 +30,9 @@ function generateHTML(team) {
             </div>
         </header>
         <main class="container-fluid">
-            <section class="col-12 col-md-8 col-lg-9">
+            <section class="col-12 col-md-12 col-lg-12">
                 <div class="row" id="managerCard">
-                    ${createCard(team)};
+                    ${createCard(team)}
                 </div>
             </section>    
         </main>
@@ -39,8 +40,9 @@ function generateHTML(team) {
 </html>`
 };
 
-
+// to generate manager's card
 function generateManager(manager) { 
+    // console.log(manager);
     return `
 <div class="col col-12 col-sm-4 col-md3">
     <div class="card h-100 ">
@@ -48,13 +50,14 @@ function generateManager(manager) {
         <h5 class="card-header custom-card-header">${manager.title}</h5>
         <div class="card-body">
             <p class="card-text">ID: ${manager.id}</p>
-            <p class="card-text"><a href="mailto:${manager.email}">Email: ${manager.email}</a></p>
+            <p class="card-text">Email: <a href="mailto:${manager.email}">${manager.email}</a></p>
             <p class="card-text">Office number: ${manager.officeNumber}</p>
         </div>
     </div>
 </div>`
 };
 
+// to generate engineer's card
 function generateEngineer(engineer) {
     return `
 <div class="col col-12 col-sm-4 col-md3">
@@ -63,13 +66,14 @@ function generateEngineer(engineer) {
         <h5 class="card-header custom-card-header">${engineer.title}</h5>
         <div class="card-body">
             <p class="card-text">ID: ${engineer.id}</p>
-            <p class="card-text"><a href="mailto:${engineer.email}">Email: ${engineer.email}</a></p>
+            <p class="card-text">Email: <a href="mailto:${engineer.email}">${engineer.email}</a></p>
             <p class="card-text">GitHub: <a href="https://github.com/${engineer.github}" target="_blank">GitHub: ${engineer.github}</a></p>
         </div>
     </div>
 </div>`
 };
-  
+
+// to generate intern's card
 function generateIntern(intern) {
     return `
 <div class="col col-12 col-sm-4 col-md3">
@@ -78,46 +82,42 @@ function generateIntern(intern) {
         <h5 class="card-header custom-card-header">${intern.title}</h5>
         <div class="card-body">
             <p class="card-text">ID: ${intern.id}</p>
-            <p class="card-text"> <a href="mailto:${intern.email}">Email: ${intern.email}</a></p>
+            <p class="card-text">Email: <a href="mailto:${intern.email}">${intern.email}</a></p>
             <p class="card-text">School:  ${intern.school}</a></p>
         </div>
     </div>
 </div>`
 };
 
+// to get all cards in one array to display them in main function
 function createCard(team) {
+
+    console.table(team);
 
     const cardArray = [];
 
-    // for(let i = 0; i < team.length; i++){
-/*        for(let i = team.length - 1; i > 0; i--){
-        console.log("what is team lenght?" + team.length);
+    for(let i = 0; i < team.length; i++){
+    //    for(let i = team.length - 1; i >= 0; i--){
+        // console.log("what is team lenght?" + team.length);
+        // console.log("i: " +i);
         console.table(team);
         if (team[i].getRole() === "Intern") {
             console.log("what is role?" + team[i].getRole());
             cardArray.push(generateIntern(team[i]));
-            // return generateIntern(team[i]);
         }
         else if (team[i].getRole() === "Engineer") {
             cardArray.push(generateEngineer(team[i]));
-            // return generateEngineer(team[i]);
         }else{
             cardArray.push(generateManager(team[i]));
-
-            // return generateManager(team[i]);
         }
     }
-  */  
 
-    cardArray.push(team.filter((employee) => employee.getRole() === 'Manager').map((manager) => generateManager(manager)));
-
-    cardArray.push(team.filter((employee) => employee.getRole() === 'Engineer').map((engineer) => generateEngineer(engineer)));
-
-    cardArray.push(team.filter((employee) => employee.getRole() === 'Intern').map((intern) => generateIntern(intern)));
-
-    console.log("what is in array" + cardArray);
+    // cardArray.push(team.filter((employee) => employee.getRole() === 'Manager').map((manager) => generateManager(manager)));
+    // cardArray.push(team.filter((employee) => employee.getRole() === 'Engineer').map((engineer) => generateEngineer(engineer)).join(''));
+    // cardArray.push(team.filter((employee) => employee.getRole() === 'Intern').map((intern) => generateIntern(intern)).join(''));
+    // console.log("what is in array" + cardArray);
+    
     return cardArray.join('');
 };
 
-  
   module.exports = generateHTML; 
