@@ -14,6 +14,10 @@ This app intend to create html page with personal cards by using node.js and npm
 
 User can get html page based on user's input
 
+## Demonstration of Functionality
+
+https://app.castify.com/view/40184865-795d-4cce-aa3f-c113794b7741 
+
 ## Credits
 
 N/A
