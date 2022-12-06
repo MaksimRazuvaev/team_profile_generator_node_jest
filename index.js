@@ -42,7 +42,7 @@ const enterManager = () => {
                 if (/[A-Za-z]/.test(namelInput)) {
                     return true;
                 } else {
-                    console.log("Please enter use letters to enter name");
+                    console.log("Please use letters to enter name");
                     return false;
                 }
             }        
@@ -68,7 +68,7 @@ const enterManager = () => {
                 if (/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(emailInput)) {
                     return true;
                 } else {
-                    console.log("Please enter email in the email@gmail.com format");
+                    console.log("Please enter email in the email@email.com format");
                     return false;
                 }
             }
@@ -105,7 +105,7 @@ const enterEngineer = () => {
                 if (/[A-Za-z]/.test(namelInput)) {
                     return true;
                 } else {
-                    console.log("Please enter use letters to enter name");
+                    console.log("Please use letters to enter name");
                     return false;
                 }
             }        
@@ -131,7 +131,7 @@ const enterEngineer = () => {
                 if (/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(emailInput)) {
                     return true;
                 } else {
-                    console.log("Please enter email in the email@gmail.com format");
+                    console.log("Please enter email in the email@email.com format");
                     return false;
                 }
             }
@@ -160,7 +160,7 @@ const enterIntern = () => {
                 if (/[A-Za-z]/.test(namelInput)) {
                     return true;
                 } else {
-                    console.log("Please enter use letters to enter name");
+                    console.log("Please use letters to enter name");
                     return false;
                 }
             }        
@@ -186,7 +186,7 @@ const enterIntern = () => {
                 if (/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(emailInput)) {
                     return true;
                 } else {
-                    console.log("Please enter email in the email@gmail.com format");
+                    console.log("Please enter email in the email@email.com format");
                     return false;
                 }
             }

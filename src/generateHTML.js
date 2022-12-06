@@ -1,7 +1,5 @@
 // main function to form final HTML file
 function generateHTML(team) {
-    // console.log("did I get to generateHTML?");
-    // console.log("what inside team"+team);
     return `
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +40,6 @@ function generateHTML(team) {
 
 // to generate manager's card
 function generateManager(manager) { 
-    // console.log(manager);
     return `
 <div class="col col-12 col-sm-4 col-md3">
     <div class="card h-100 ">
@@ -97,12 +94,7 @@ function createCard(team) {
     const cardArray = [];
 
     for(let i = 0; i < team.length; i++){
-    //    for(let i = team.length - 1; i >= 0; i--){
-        // console.log("what is team lenght?" + team.length);
-        // console.log("i: " +i);
-        console.table(team);
         if (team[i].getRole() === "Intern") {
-            console.log("what is role?" + team[i].getRole());
             cardArray.push(generateIntern(team[i]));
         }
         else if (team[i].getRole() === "Engineer") {
